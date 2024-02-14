@@ -6,3 +6,6 @@ run: build
 
 test:
 	@go test -v ./...
+
+example:
+	@http http://localhost:8080/reviews/689f2ec-b015-4d16-a022-baba3330acb9 | jq
