@@ -55,7 +55,7 @@ func (s *SQLLiteStore) Init() error {
 	if _, err := s.db.Exec(query); err != nil {
 		return err
 	}
-	query = `create table if not exists reviews_shoes (
+	query = `create table if not exists review_shoes (
 		id varchar(500) primary key,
         review varchar(500),
         shoe_drop number,
@@ -83,8 +83,24 @@ func (s *SQLLiteStore) Init() error {
 		return err
 	}
 
+	query = `create table if not exists trail_event_distances (
+		id varchar(500) primary key,
+        trail_event varchar(500),
+        distance number,
+        gpx_link varchar(500),
+        foreign key (trail_event) references trail_events(id)
+    );`
+
+	if _, err := s.db.Exec(query); err != nil {
+		return err
+	}
+
 	query = `create table if not exists trail_events (
-		id varchar(500) primary key
+		id varchar(500) primary key,
+        name varchar(500),
+        date varchar(500),
+        location varchar(500),
+        podcast_episode varchar(500)
     );`
 
 	if _, err := s.db.Exec(query); err != nil {

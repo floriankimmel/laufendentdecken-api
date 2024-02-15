@@ -28,7 +28,7 @@ type Review struct {
 }
 
 type Shoe struct {
-	ID   string `json:"id"`
+	ID   string `json:"id,omitempty"`
 	Drop int64  `json:"drop"`
 	Grip string `json:"grip"`
 	Sole string `json:"sole"`
@@ -94,7 +94,7 @@ func (s *SQLLiteStore) GetReviewByID(reviewID string) (*Review, error) {
 }
 
 func queryShoe(s *SQLLiteStore, id string) (*Shoe, error) {
-	shoes, err := s.db.Query("select id, shoe_drop, grip, sole from reviews_shoes where review = $1", id)
+	shoes, err := s.db.Query("select shoe_drop, grip, sole from review_shoes where review = $1", id)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,6 @@ func mapToReview(rows *sql.Rows) (*Review, error) {
 func mapToShoe(rows *sql.Rows) (*Shoe, error) {
 	shoe := new(Shoe)
 	err := rows.Scan(
-		&shoe.ID,
 		&shoe.Drop,
 		&shoe.Grip,
 		&shoe.Sole,

@@ -7,5 +7,8 @@ run: build
 test:
 	@go test -v ./...
 
-example:
-	@http http://localhost:8080/reviews/689f2ec-b015-4d16-a022-baba3330acb9 | jq
+review:
+	@http http://localhost:8080/reviews/8ba03d9f-0cfc-4653-a1d5-0ff4e1ff02a5 | jq
+
+event:
+	@http http://localhost:8080/trailEvents/7eecfeea-5070-42f7-ba1e-0536c8a55c53 | jq
