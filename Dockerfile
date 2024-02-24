@@ -10,6 +10,8 @@ RUN go test -v
 RUN CGO_ENABLED=1 GOOS=linux go build -o lep-api
 
 FROM alpine:edge
+ARG STRONGBOX_KEY
+ENV STRONGBOX_KEY=$STRONGBOX_KEY
 WORKDIR /app
 RUN apk add --no-cache sqlite
 COPY --from=build /app/lep-api /app/lep-api
