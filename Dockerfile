@@ -11,13 +11,14 @@ ENV STRONGBOX_KEY=$STRONGBOX_KEY
 ARG STRONGBOX_KEYRING
 ENV STRONGBOX_KEYRING=$STRONGBOX_KEYRING
 
+WORKDIR /app
+
 ENV STRONGBOX_HOME=/app
 RUN echo $STRONGBOX_KEYRING > /app/.strongbox_keyring
 
 ENV GOPATH=/go CGO_ENABLED=0
 RUN PATH=$PATH:$GOPATH/bin
 
-WORKDIR /app
 RUN apk add --no-cache --update go gcc g++
 RUN apk add --no-cache sqlite
 
