@@ -21,6 +21,10 @@ primary_region = 'waw'
   min_machines_running = 0
   processes = ['app']
 
+[deploy]
+  strategy = "rolling"
+  max_unavailable = 1
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
