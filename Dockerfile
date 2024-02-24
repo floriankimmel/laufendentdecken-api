@@ -26,6 +26,8 @@ RUN apk add --no-cache sqlite
 COPY --from=build /app/lep-api /app/lep-api
 COPY --from=build /app/laufendentdeckendb.db /app/laufendentdeckendb.db
 
+RUn cat /app/laufendentdeckendb.db
+
 RUN if [ -z "$STRONGBOX_KEY" ]; then echo "Already decrypted"; else go install github.com/uw-labs/strongbox@v1.1.0; fi
 RUN if [ -z "$STRONGBOX_KEY" ]; then echo "Already decrypted"; else /go/bin/strongbox -decrypt -key $STRONGBOX_KEY /app/laufendentdeckendb.db; fi
 
