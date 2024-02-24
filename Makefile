@@ -2,6 +2,7 @@ build:
 	@go build -o bin/laufendentdeck-api
 
 run: build
+	@clear
 	@./bin/laufendentdeck-api
 
 test:

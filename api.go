@@ -27,8 +27,9 @@ func NewAPIServer(
 func (s *APIServer) Run() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/reviews/{id}", makeHTTPHandleFunc(s.handleReviewsByID))
-	router.HandleFunc("/trailEvents/{id}", makeHTTPHandleFunc(s.handleTrailEventsByID))
+	router.HandleFunc("/reviews/{id}", makeHTTPHandleFunc(s.handleReviewsByID)).Methods("GET")
+	router.HandleFunc("/trailEvents/{id}", makeHTTPHandleFunc(s.handleTrailEventsByID)).Methods("GET")
+	router.HandleFunc("/rss", makeHTTPHandleFunc(s.GenerateRssFeed)).Methods("GET")
 
 	log.Println("API server running on port: ", s.listenAddress)
 

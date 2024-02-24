@@ -10,6 +10,7 @@ import (
 type Storage interface {
 	GetReviewByID(id string) (*Review, error)
 	GetTrailEventByID(id string) (*TrailEvent, error)
+	GetEpisodes() (*[]Episode, error)
 }
 
 type SQLLiteStore struct {
@@ -55,6 +56,7 @@ func (s *SQLLiteStore) Init() error {
 	if _, err := s.db.Exec(query); err != nil {
 		return err
 	}
+
 	query = `create table if not exists review_shoes (
 		id varchar(500) primary key,
         review varchar(500),
@@ -101,6 +103,18 @@ func (s *SQLLiteStore) Init() error {
         date varchar(500),
         location varchar(500),
         podcast_episode varchar(500)
+    );`
+
+	if _, err := s.db.Exec(query); err != nil {
+		return err
+	}
+
+	query = `create table if not exists test_episodes (
+		id varchar(500) primary key,
+        name varchar(500),
+        slug varchar(500),
+        date varchar(500),
+        lengthInBytes number
     );`
 
 	if _, err := s.db.Exec(query); err != nil {

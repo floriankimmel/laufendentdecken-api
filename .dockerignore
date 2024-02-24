@@ -1,0 +1,3 @@
+# flyctl launch added from .gitignore
+**/.strongbox-keyid
+fly.toml
