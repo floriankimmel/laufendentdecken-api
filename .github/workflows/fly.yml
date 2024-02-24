@@ -5,7 +5,6 @@ on:
       - main
 env:
   STRONGBOX_KEY: ${{ secrets.STRONGBOX_KEY }}
-  STRONGBOX_KEYRING: ${{ secrets.STRONGBOX_KEYRING }}
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   deploy:
@@ -15,7 +14,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: |
-             flyctl deploy --remote-only \
-             --build-arg STRONGBOX_KEY=${{ secrets.STRONGBOX_KEY }} \
-             --build-arg STRONGBOX_KEYRING=${{ secrets.STRONGBOX_KEYRING }}
+      - run: flyctl deploy --remote-only --build-arg STRONGBOX_KEY=${{ secrets.STRONGBOX_KEY }}
