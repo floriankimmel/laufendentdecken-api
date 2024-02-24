@@ -9,6 +9,7 @@ FROM alpine:edge
 ARG STRONGBOX_KEY
 ENV STRONGBOX_KEY=$STRONGBOX_KEY
 WORKDIR /app
+RUN apk add --no-cache --update go gcc g++
 RUN apk add --no-cache sqlite
 COPY --from=build /app/lep-api /app/lep-api
 COPY --from=build /app/laufendentdeckendb.db /app/laufendentdeckendb.db
