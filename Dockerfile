@@ -17,9 +17,11 @@ RUN apk add --no-cache --update go gcc g++
 RUN apk add --no-cache sqlite
 
 COPY --from=build /app/lep-api /app/lep-api
-COPY --from=build /app/laufendentdeckendb.db /app/laufendentdeckendb.db
+COPY --from=build /app/laufendentdeckendb.db /app/laufendentdeckendb-encrypted.db
 
-RUN if [ -z "$STRONGBOX_KEY" ]; then echo "Already decrypted"; else go install github.com/uw-labs/strongbox@v1.1.0; fi
-RUN if [ -z "$STRONGBOX_KEY" ]; then echo "Already decrypted"; else /go/bin/strongbox -decrypt -key $STRONGBOX_KEY /app/laufendentdeckendb.db > /dev/null;  fi
+RUN if [ -n "$STRONGBOX_KEY" ]; then \
+        go install github.com/uw-labs/strongbox@v1.1.0; \
+        /go/bin/strongbox -decrypt -key $STRONGBOX_KEY /app/laufendentdeckendb-encrypted.db > /app/laufendentdeckendb.db; \
+    fi
 
 ENTRYPOINT /app/lep-api
