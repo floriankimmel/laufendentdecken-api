@@ -30,7 +30,7 @@ func (s *APIServer) GenerateRssFeed(w http.ResponseWriter, r *http.Request) erro
 	episodes, _ := s.store.GetEpisodes()
 
 	for _, episode := range *episodes {
-		episodePubDate, _ := time.Parse("2006-01-02T15:04:05", episode.Date)
+		episodePubDate, _ := time.Parse("2006-01-02 15:04:05", episode.Date)
 		name := episode.Name
 		slug := episode.Slug
 
