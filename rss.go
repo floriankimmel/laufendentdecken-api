@@ -13,7 +13,7 @@ func (s *APIServer) GenerateRssFeed(w http.ResponseWriter, r *http.Request) erro
 	w.Header().Set("Content-Type", "application/xml")
 
 	pubDate := time.Date(2016, time.December, 31, 0, 0, 0, 0, time.UTC)
-	logo := "https://laufendentdecken-podcast.at/wp-content/uploads/2019/01/itunes-logo.jpg"
+	logo := "https://laufendentdecken-podcast.at/wp-content/uploads/2024/04/Logo-Icon_Zeichenflaeche-1-1-300x300.jpg"
 	updatedDate := time.Now()
 
 	lep := podcast.New(
