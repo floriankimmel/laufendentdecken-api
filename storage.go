@@ -11,6 +11,8 @@ type Storage interface {
 	GetReviewByID(id string) (*Review, error)
 	GetTrailEventByID(id string) (*TrailEvent, error)
 	GetEpisodes() (*[]Episode, error)
+	GetDopingBanByID(id string) (*DopingBan, error)
+	GetDopingBans() (*[]DopingBan, error)
 }
 
 type SQLLiteStore struct {
@@ -115,6 +117,20 @@ func (s *SQLLiteStore) Init() error {
         slug varchar(500),
         date varchar(500),
         lengthInBytes number
+    );`
+
+	if _, err := s.db.Exec(query); err != nil {
+		return err
+	}
+
+	query = `create table if not exists doping_bans (
+		id varchar(500) primary key,
+        name varchar(500),
+        sport varchar(500),
+        ban varchar(500),
+        ban_start varchar(500),
+        ban_end varchar(500),
+        reason varchar(500)
     );`
 
 	if _, err := s.db.Exec(query); err != nil {

@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const methodGet = "GET"
+
 type APIServer struct {
 	listenAddress string
 	store         Storage
@@ -29,6 +31,8 @@ func (s *APIServer) Run() {
 
 	router.HandleFunc("/reviews/{id}", makeHTTPHandleFunc(s.handleReviewsByID)).Methods("GET")
 	router.HandleFunc("/trailEvents/{id}", makeHTTPHandleFunc(s.handleTrailEventsByID)).Methods("GET")
+	router.HandleFunc("/doping-bans/{id}", makeHTTPHandleFunc(s.handleDopingBanByID)).Methods("GET")
+	router.HandleFunc("/doping-bans", makeHTTPHandleFunc(s.handleDopingBans)).Methods("GET")
 	router.HandleFunc("/rss", makeHTTPHandleFunc(s.GenerateRssFeed)).Methods("GET")
 
 	log.Println("API server running on port: ", s.listenAddress)

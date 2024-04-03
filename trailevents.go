@@ -25,7 +25,7 @@ type TrailEventDistance struct {
 }
 
 func (s *APIServer) handleTrailEventsByID(w http.ResponseWriter, r *http.Request) error {
-	if r.Method == "GET" {
+	if r.Method == methodGet {
 		return s.handleGetTrailEventsByID(w, r)
 	}
 

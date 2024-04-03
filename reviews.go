@@ -35,7 +35,7 @@ type Shoe struct {
 }
 
 func (s *APIServer) handleReviewsByID(w http.ResponseWriter, r *http.Request) error {
-	if r.Method == "GET" {
+	if r.Method == methodGet {
 		return s.handleGetReviewsByID(w, r)
 	}
 

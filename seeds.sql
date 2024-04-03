@@ -1,3 +1,24 @@
+Insert into doping_bans
+    (
+        id,
+        name,
+        sport,
+        ban,
+        ban_start,
+        ban_end,
+        reason
+    )
+values
+    (
+        "1b1b3f6f-1a0d-4e1b-8d1f-4b0d7f4b1b2e",
+        "Alexander PACHSCHWÖLL",
+        "Triathlon",
+        "2 Jahre Sperre",
+        "03.09.2023",
+        "02.09.2025",
+        "2.1, 2.2"
+    );
+
 insert into reviews
     (
         id,
